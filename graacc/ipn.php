@@ -13,7 +13,6 @@ $receiver_email = 'seller@paypalsandbox.com';
     'pswd' => 'root',
     'dbname' => 'hackaton'
 );*/
- logIPN($_POST);
 //As notificações sempre serão via HTTP POST, então verificamos o método
 //utilizado na requisição, antes de fazer qualquer coisa.
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

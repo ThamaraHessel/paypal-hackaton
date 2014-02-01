@@ -41,64 +41,40 @@
 
                 <div class="reg-block-header">
                     <div class="visivel">
-                    <p>Clique <a class="color-green" href="verLogs.php" target="_blank">AQUI</a> e veja quem ja colaborou! (LOGS!!!!)</p>
+                    <p>Clique <a class="color-green" href="https://www.graacc.org.br/o-graacc.aspx" target="_blank">aqui</a> e conheça nossa luta!</p>
                     <ul class="list-inline style-icons text-center">
                         <li>                            
                             <a class="color-green" href="https://www.graacc.org.br/o-graacc.aspx" target="_blank"><img src="../assets/img/bg/15.jpg" width="100"></a>
                         </li>
                     </ul>
 
-                    <p>Contamos com você para continuarmos vitoriosos nessa batalha contra o câncer infanto-juvenil! </p>
-                    <p>Sendo um sócio mantenedor do GRAACC, você coloca em prática sua vontade de ajudar e contribui para que nosso hospital possa oferecer uma estrutura adequada e completa aos pacientes.<p/>
-                    <hr>
-                    <p>Você pode optar entre duas modalidades de doação: </p>
-                    </div>
+                    <p>Quem já colaborou! </p>
+                  
+                    
                 </div>
 
 
 
-                <form  action="/graacc/checkoutRec.php" id="logarfrm" name="logarfrm" method="post" target="_top">
                     <div class="row"> 
                         <div class="text-center ">
-                            <h5>** Assinatura mensal **</h5>
-                            <input type="hidden" name="cmd" value="_s-xclick">
-                            <input type="hidden" name="hosted_button_id" value="BR6NK7DGVBEW6">                       
-                            <input type="hidden" name="currency_code" value="BRL"> 
-                            <input type="hidden"  name="on0" value="">
-                            <select name="assinatura" class="form-control" >
-                                <option value="5">R$ 5 - mensalmente</option>
-                                <option value="10">R$ 10 - mensalmente</option>
-                                <option value="15">R$ 15 - mensalmente</option>
-                            </select>
+                          <?php 
+                          		$path = getcwd()."/log.txt";
+								$fp = fopen($path,"r");
+
+								$conteudo = fread($fp, filesize ($path));
+
+								//$conteudo = json_decode($conteudo);
+
+								echo $conteudo;
+
+								@fclose($fp);
+
+                          ?>
                         </div>
                         <br>
-                        <div class="row text-center">  
-                            <div class="col-md-10 col-md-offset-1 text-center">
-                                <input type="image" src="https://www.paypal-brasil.com.br/logocenter/util/img/botao-checkout_horizontal_assinecom_ap.png" border="0" name="submit" alt="PayPal - A maneira mais fácil e segura de efetuar pagamentos online!">
-                            </div>
-                        </div>
+                        
                     </div>
-                </form>
-
-                <hr>
-                <div class="row text-center">  
-                    <h3>OU</h3>
-                </div>
-                <hr>
-                <form action="/graacc/checkout.php" id="logarfrm" name="logarfrm" method="post" target="_top">
-                    <div class="text-center">
-                        <h5> ** Doação única **</h5>
-                        <h4>R$ </h4>
-                       <input type='text' name='vlrdoacao' id='vlrdoacao' class='form-control ' placeholder="Digite o valor da sua doação (Ex.: 10 ou 25.50) ">
-                        <input type="hidden" name="cmd" value="_s-xclick">
-                        <input type="hidden" name="hosted_button_id" value="AUVWE3YKM656U">
-                        <img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
-
-                        <div class="col-md-10 col-md-offset-1">
-                       <input type="image" src="https://www.paypal-brasil.com.br/logocenter/util/img/botao-checkout_horizontal_paguecom_ap.png" border="0" name="submit" alt="PayPal - A maneira mais fácil e segura de efetuar pagamentos online!">
-                        </div>
-                    </div>
-                </form> 
+              
                 <hr>
                 <div class="row text-center">
 
