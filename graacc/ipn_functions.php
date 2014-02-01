@@ -35,56 +35,16 @@ function isIPNValid(array $message)
 }
 
 
-function logIPN(PDO $pdo, array $message)
+function logIPN( $message)
 {
-    $stm = $pdo->prepare('
-        INSERT INTO `ipn`(
-            `txn_id`,
-            `txn_type`,
-            `receiver_email`,
-            `payment_status`,
-            `pending_reason`,
-            `reason_code`,
-            `custom`,
-            `invoice`,
-            `notification`,
-            `hash`
-        ) VALUES (
-            :txn_id,
-            :txn_type,
-            :receiver_email,
-            :payment_status,
-            :pending_reason,
-            :reason_code,
-            :custom,
-            :invoice,
-            :notification,
-            :hash
-        );');
+    $path = getcwd();
+    $fp = fopen($path."/log.txt", "a+");
+    var_dump( $message,$fp );
+    $jsonTransaction = json_encode($message);
+
+    $fp= fwrite($fp,$jsonTransaction.PHP_EOL);
  
-    $ipn = array_merge(array(
-        'txn_id' => null,
-        'txn_type' => null,
-        'payment_status' => null,
-        'pending_reason' => null,
-        'reason_code' => null,
-        'custom' => null,
-        'invoice' => null
-    ), $message);
+   @fclose($fp);    
+    
  
-    $notification = serialize($message);
-    $hash = md5($notification);
- 
-    $stm->bindValue(':txn_id', $ipn['txn_id']);
-    $stm->bindValue(':txn_type', $ipn['txn_type']);
-    $stm->bindValue(':receiver_email', $ipn['receiver_email']);
-    $stm->bindValue(':payment_status', $ipn['payment_status']);
-    $stm->bindValue(':pending_reason', $ipn['pending_reason']);
-    $stm->bindValue(':reason_code', $ipn['reason_code']);
-    $stm->bindValue(':custom', $ipn['custom']);
-    $stm->bindValue(':invoice', $ipn['invoice']);
-    $stm->bindValue(':notification', $notification);
-    $stm->bindValue(':hash', $hash);
- 
-    return $stm->execute();
 }

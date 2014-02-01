@@ -1,9 +1,9 @@
 <?php
 
-require 'is_validipn.php'
+require 'ipn_functions.php';
 
 
-$receiver_email = 'empresa@teste.com.br';
+$receiver_email = 'seller@paypalsandbox.com';
  
 //Informações para conexão com o banco de dados, que utilizaremos
 //para gravar o log.
@@ -13,7 +13,7 @@ $receiver_email = 'empresa@teste.com.br';
     'pswd' => 'root',
     'dbname' => 'hackaton'
 );*/
- 
+ logIPN($_POST);
 //As notificações sempre serão via HTTP POST, então verificamos o método
 //utilizado na requisição, antes de fazer qualquer coisa.
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -26,21 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //Se chegamos até aqui, significa que estamos lidando com uma
     //notificação IPN válida. Agora precisamos verificar se somos o
     //destinatário dessa notificação, verificando o campo receiver_email.
-    if ($_POST['receiver_email'] == $receiver_email) {
-        //Está tudo correto, somos o destinatário da notificação, vamos
-        //gravar um log dessa notificação.
-    /*    $pdoattrs = array(
-            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
- 
-        $pdo = new PDO(sprintf('mysql:host=%s;dbname=%s',
-                               $mysql['host'], $mysql['dbname']),
-                       $mysql['user'],
-                       $mysql['pswd'],
-                       $pdoattrs);*/
- 
-        if (logIPN($pdo, $_POST)) {
+    //if ($_POST['receiver_email'] == $receiver_email) {
+        logIPN($_POST);
             //Log gravado, podemos seguir com as regras de negócio para
             //essa notificação.
-        }
-    }
+        
+    //}
 }
